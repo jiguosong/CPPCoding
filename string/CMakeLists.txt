@@ -1,0 +1,2 @@
+add_subdirectory(palindromepermutation)
+add_subdirectory(longestprefix)

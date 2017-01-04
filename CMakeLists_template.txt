@@ -1,0 +1,9 @@
+SET(INCLUDED_FILES
+        ../src/XXX.h 
+        ../src/XXX.cpp 
+        XXX_test.cpp
+    )
+add_executable(XXX ${INCLUDED_FILES})
+target_link_libraries(XXX gtest gmock_main)
+cotire(XXX)
+add_test(NAME XXX_test COMMAND XXX)
