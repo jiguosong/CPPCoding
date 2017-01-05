@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "movezerotoright.h"
+#include "../src/movezerotoright.h"
 
 using std::cout; 
 using std::endl;
@@ -28,6 +28,7 @@ TEST(movezerotoright, normal)
 	movezerotoright tc;
 	vector<int> nums = {1,2,0,-2,0,3,5,0,1};
 	tc.moveZeroesToRight(nums);
+	PrintVector(nums);
 	ASSERT_EQ(nums[0], 1);
 	ASSERT_EQ(nums[1], 2);
 	ASSERT_EQ(nums[2], 1);

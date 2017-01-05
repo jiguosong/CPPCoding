@@ -97,7 +97,7 @@ using namespace std;
 
 using namespace std;
 
-#include "../src/traversal_inorder.h"
+#include "../src/movezerotoright_keeporder.h"
 
 /*
  Choose auto x when you want to work with copies.
@@ -176,15 +176,13 @@ string gen_random(const int len)
 	return str;
 }
 
-TEST(traversal_inorder, normal1)
+TEST(movezerotoright_keeporder, normal1)
 {
-	inorder_traversal tc;
+	movezerotoright_keeporder tc;
+	vector<int> nums = {1,0,2,0,5,0,-1,0,2};
+	tc.MoveZeroes(nums);
 
-	TreeNode *root = randomBST(7, 1, 100);
-	printPretty(root, 2, 4, cout);
-
-	vector<int> ans = tc.inOrder(root);
-	PrintVector(ans);
+	PrintVector(nums);
 
 }
 

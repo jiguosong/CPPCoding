@@ -8,7 +8,7 @@
 #ifndef INORDER_TRAVERSAL_H_
 #define INORDER_TRAVERSAL_H_
 
-#include "../Tree.h"
+#include "Tree.h"
 
 class inorder_traversal {
 public:

@@ -97,7 +97,7 @@ using namespace std;
 
 using namespace std;
 
-#include "../src/traversal_inorder.h"
+#include "../src/bstiterator.h"
 
 /*
  Choose auto x when you want to work with copies.
@@ -105,91 +105,86 @@ using namespace std;
  Choose auto const &x when you want to work with original items and will not modify them
  */
 template<class T>
-void PrintVector(const vector<T> &vec)
-{
-	for (auto const &v : vec)
-		cout << setw(3) << v << ' ';
-	cout << endl;
+void PrintVector(const vector<T> &vec) {
+    for (auto const &v : vec)
+        cout << setw(3) << v << ' ';
+    cout << endl;
 }
 
 template<class T>
-void PrintVectorVector(const vector<vector<T>> &vec)
-{
-	for (auto const &v : vec)
-		PrintVector(v);
+void PrintVectorVector(const vector<vector<T>> &vec) {
+    for (auto const &v : vec)
+        PrintVector(v);
 }
 
 template<class T>
-bool CompareVectorVector(const vector<T> &v1, const vector<T> &v2)
-{
-	if (v1.size() != v2.size())
-		return false;
+bool CompareVectorVector(const vector<T> &v1, const vector<T> &v2) {
+    if (v1.size() != v2.size())
+        return false;
 
-	std::multiset<T> s1(v1.begin(), v1.end());
-	std::multiset<T> s2(v2.begin(), v2.end());
-	std::vector<T> v3;
-	std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(),
-			std::back_inserter(v3));
-	return (v3.size() == v1.size());
+    std::multiset<T> s1(v1.begin(), v1.end());
+    std::multiset<T> s2(v2.begin(), v2.end());
+    std::vector<T> v3;
+    std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(),
+                          std::back_inserter(v3));
+    return (v3.size() == v1.size());
 }
 
-static int getRandom(int lower, int upper)
-{
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> dist(lower, upper);
-	return dist(gen);
+static int getRandom(int lower, int upper) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(lower, upper);
+    return dist(gen);
 }
 
 // first way to generate random string of len
-string getRandomString(int len)
-{
-	string str(len, ' ');
-	for (int i = 0; i < len; ++i) {
-		int randchar =
-				getRandom(0, std::numeric_limits<int>::max()) % (26 + 26 + 10);
-		if (randchar < 26) {
-			str[i] = 'a' + randchar;
-		} else if (randchar < 26 + 26) {
-			str[i] = 'A' + randchar - 26;
-		} else {
-			str[i] = '0' + randchar - 26 - 26;
-		}
-	}
+string getRandomString(int len) {
+    string str(len, ' ');
+    for (int i = 0; i < len; ++i) {
+        int randchar =
+                getRandom(0, std::numeric_limits<int>::max()) % (26 + 26 + 10);
+        if (randchar < 26) {
+            str[i] = 'a' + randchar;
+        } else if (randchar < 26 + 26) {
+            str[i] = 'A' + randchar - 26;
+        } else {
+            str[i] = '0' + randchar - 26 - 26;
+        }
+    }
 
-	return str;
+    return str;
 }
 
 // second way to generate random string of len
-string gen_random(const int len)
-{
-	static const char alphanum[] = "0123456789"
-			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-			"abcdefghijklmnopqrstuvwxyz";
+string gen_random(const int len) {
+    static const char alphanum[] = "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
 
-	string str(len, ' ');
-	for (int i = 0; i < len; ++i) {
-		str[i] =
-				alphanum[getRandom(0, std::numeric_limits<int>::max()) % (sizeof(alphanum) - 1)];
-	}
+    string str(len, ' ');
+    for (int i = 0; i < len; ++i) {
+        str[i] =
+                alphanum[getRandom(0, std::numeric_limits<int>::max()) % (sizeof(alphanum) - 1)];
+    }
 
-	return str;
+    return str;
 }
 
-TEST(traversal_inorder, normal1)
-{
-	inorder_traversal tc;
+TEST(bstiterator, normal1) {
 
-	TreeNode *root = randomBST(7, 1, 100);
-	printPretty(root, 2, 4, cout);
+    TreeNode *x = randomBST(10, 1, 100);
+    bstiterator it(x);
+    printPretty(x, 2, 4, cout);
+    EXPECT_TRUE(it.hasNext());
 
-	vector<int> ans = tc.inOrder(root);
-	PrintVector(ans);
+    while (it.hasNext()) {
+        cout << it.next() << " ";
+    }
 
+    EXPECT_FALSE(it.hasNext());
 }
 
-GTEST_API_ int main(int argc, char **argv)
-{
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
+GTEST_API_ int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
