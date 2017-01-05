@@ -1,0 +1,7 @@
+add_executable(GotW01_varinitialize GotW01_varinitialize.cpp)
+add_executable(GotW02_tempvar GotW02_tempvar.cpp)
+add_executable(GotW03_usinglib GotW03_usinglib.cpp)
+add_executable(GotW04_complex GotW04_complex.cpp)
+add_executable(GotW05_overridevrifun GotW05_overridevrifun.cpp)
+add_executable(GotW06_const GotW06_const.cpp)
+add_executable(GotW09_exception_safety GotW09_exception_safety.cpp)

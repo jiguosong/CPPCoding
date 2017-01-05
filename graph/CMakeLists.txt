@@ -1,0 +1,2 @@
+add_subdirectory(courseschedule)
+add_subdirectory(minimumheighttree)
