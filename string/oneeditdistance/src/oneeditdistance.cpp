@@ -53,6 +53,5 @@ bool oneeditdistance::isOneEditDistance(string s, string t)
 	} else {
 		return diffbyone(s, t);
 	}
-	return false;
 }
 
